@@ -35,7 +35,7 @@ for country_name in country_names:
 # list all unique keywords in all countries
 unique_keywords = []
 
-# loop through all the countries
+# loop through all the countries and find out all unique keywords
 for country_name in country_names:
     # loop through all the keywords in the country
     for keyword in country_trends_dict[country_name]["keyword"]:
@@ -44,15 +44,3 @@ for country_name in country_names:
             # add keyword to the list
             unique_keywords.append(keyword)
 
-
-for item in unique_keywords:
-    print(f'"{item}"')
-
-print(len(unique_keywords[0:0+40]))
-# print the number of unique keywords
-print(len(unique_keywords))
-print(unique_keywords[-2])
-
-slist = [2023, 'City', 'Tekken 8', 'Qatar', '2022 World Cup', 'Spirit', 'MP3', 'Entertainment', 'FIFA', 1401, 'Star', 'World Cup', 'Wallpaper', '.af', 'Amirza', 'Calendar date', 2022, 'Dastan', 'Ladder', 'Today', 'Brother', 'CapCut - Video Editor', 'Machine', 'FIFA Mobile', 'Kung Fu Panda', 'Component Object Model', 'Sonic the Hedgehog 2', 'Call of Duty: Modern Warfare 2', 'Samsung Electronics', 'Sonic the Hedgehog', 'Half-Life TV', 'Absolute zero', 'Degree', 'PlanetRomeo', 'Microsoft Flight Simulator', 'Fruit', 'Pet']
-print(len(slist))
-print(len(country_trends_dict))
