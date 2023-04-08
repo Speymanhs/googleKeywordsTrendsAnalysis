@@ -1,7 +1,7 @@
 #This is a dictionary mapping vide games keywords appearing in all of the csv files as keys and their corresponding genres as values
 #The categories are:
 # ["Action/Fighting/Horror", "Adventure", "RPG", "Simulation", "Strategy", "Sports", "Puzzle", "Platformer", "Casual", "Family", "None"]
-genre_dictionary = {
+keyword_to_genre_dictionary = {
     "2023": "None",
     "City": "Simulation",
     "Tekken 8": "Action/Fighting/Horror",
@@ -1034,7 +1034,7 @@ genre_dictionary = {
 # as keys and their corresponding genres (in terms of number of players) as values
 #The categories are:
 # ["Multi-Player", "Single-Player", "None"]
-num_of_player_dict = {
+keyword_to_num_of_player_dict = {
     "2023": "None",
     "City": "None",
     "Tekken 8": "Multi-Player",
