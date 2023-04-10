@@ -57,11 +57,11 @@ def compute_similarity_between_countries_in_each_cluster(cluster_to_countries_di
             countries_to_difference_from_mean_dict[country] = difference_from_mean
         sorted_countries_to_difference_from_mean_dict = sorted(countries_to_difference_from_mean_dict.items(), key=lambda x: x[1])
         print("The countries that are most similar to criteria_mean of the cluster are: ")
-        for i in range(10):
+        for i in range(min(10, len(sorted_countries_to_difference_from_mean_dict))):
             print(sorted_countries_to_difference_from_mean_dict[i][0],  " : ", sorted_countries_to_difference_from_mean_dict[i][1])
         print("The countries that are the most different from the criteria_mean of the cluster are: ")
         # the following line prints the 5 countries that are the most different from the mean of the mean_criteria_value of the cluster
-        for i in range(10):
+        for i in range(min(10, len(sorted_countries_to_difference_from_mean_dict))):
             print(sorted_countries_to_difference_from_mean_dict[-i-1][0], " : ", sorted_countries_to_difference_from_mean_dict[-i-1][1])
 
         print("")
