@@ -1,9 +1,4 @@
-from src.category_dictionaries import keyword_to_genre_dictionary
-from src.read_countries_keywords_xlsx import read_google_trends_xlsx_files
-
-
-country_trends_dict, country_names = read_google_trends_xlsx_files()
-
+from sklearn.cluster import KMeans
 
 def compute_each_country_genre_count(country_trends_dict, country_names, keyword_to_genre_dictionary):
     country_to_genre_dict = {}
@@ -39,7 +34,7 @@ def compute_each_country_genre_count(country_trends_dict, country_names, keyword
 
 
 # the following function gets a genre and prints the sorted list of countries based on the percentage of keywords belonging to that genre
-def get_sorted_list_of_countries_based_on_genre_including_none(genre):
+def get_sorted_list_of_countries_based_on_genre_including_none(genre, country_trends_dict, country_names, keyword_to_genre_dictionary):
     # compute and get the number of keywords belonging to each genre in each country and the total number of keywords in each country
     country_to_genre_dict, country_to_num_of_keywords_dict = compute_each_country_genre_count(country_trends_dict,
                                                                                               country_names,
@@ -69,7 +64,7 @@ def get_sorted_list_of_countries_based_on_genre_including_none(genre):
 
 # the following function gets a genre and print the sorted list of countries based on
 # the percentage of keyword belonging to that genre excluding the none genre
-def get_sorted_list_of_countries_based_on_genre_excluding_none(genre):
+def get_sorted_list_of_countries_based_on_genre_excluding_none(genre, country_trends_dict, country_names, keyword_to_genre_dictionary):
     # compute and get the number of keywords belonging to each genre in each country and the total number of keywords in each country
     country_to_genre_dict, country_to_num_of_keywords_dict = compute_each_country_genre_count(country_trends_dict,
                                                                                               country_names,
@@ -136,18 +131,6 @@ def assign_countries_points_in_space(country_to_genre_dict, country_to_num_of_ke
     return country_to_points_dict
 
 
-# the following line calls the function to assign each country a point in space
-country_to_genre_dict, country_to_num_of_keywords_dict = compute_each_country_genre_count(country_trends_dict, country_names, keyword_to_genre_dictionary)
-country_to_points_dict = assign_countries_points_in_space(country_to_genre_dict, country_to_num_of_keywords_dict)
-print(country_to_genre_dict["United Kingdom"])
-print(country_to_points_dict["United Kingdom"])
-print(country_to_points_dict["Canada"])
-print(country_to_points_dict["Australia"])
-print(country_to_points_dict["Iran"])
-
-
-from sklearn.cluster import KMeans
-
 # the following code performs the k-means clustering algorithm
 def perform_k_means_clustering(country_to_points_dict, num_of_clusters):
     # initialize a list to store the points of each country
@@ -178,10 +161,4 @@ def perform_k_means_clustering(country_to_points_dict, num_of_clusters):
             # add the country to the dictionary
             cluster_to_countries_dict[cluster].append(country_name)
     return cluster_to_countries_dict
-
-# the following line calls the function to perform the k-means clustering algorithm
-cluster_to_countries_dict = perform_k_means_clustering(country_to_points_dict, 5)
-print(cluster_to_countries_dict[0])
-print(cluster_to_countries_dict[1])
-print(cluster_to_countries_dict[3])
 
