@@ -95,3 +95,30 @@ def read_unemployment_data_xlsx_file():
     country_to_unemployment_dictionary = {row[0]: row[7] for row in unemployment_df.itertuples(index=False)}
 
     return country_to_unemployment_dictionary
+
+
+# the following function is used to read the xlsx file named "mandatory_service_data.xlsx" and return a dictionary containing the data
+#the situation of mandatory_service in that country. The return dictionary of this function is of the format: "Country": mandatory_service_status
+def read_mandatory_service_data_xlsx_file():
+
+    mandatory_srvice_status = {"Yes": 2, "De jure": 1, "Uncertain": 3, "unclear": 1, "Infrequent": 1 ,"No": 0}
+    # define the directory path containing dataset
+    dataset_directory = "datasets/"
+
+    #define a dictionar named country_to_mandatory_service_dictionary
+    country_to_mandatory_service_dictionary = {}
+
+    # read the xlsx file
+    mandatory_service_df = pd.read_excel(os.path.join(dataset_directory, "mandatory_service_data.xlsx"), header=None)
+
+    # assign the first row as column labels
+    mandatory_service_df.columns = mandatory_service_df.iloc[0]
+
+    # remove the first row from the dataframe because it is the column labels
+    mandatory_service_df = mandatory_service_df[1:]
+
+    # create a dictionary with the first column as keys and the other columns as values
+    country_to_mandatory_service_dictionary = {row[0]: mandatory_srvice_status[row[1]] for row in mandatory_service_df.itertuples(index=False)}
+
+    return country_to_mandatory_service_dictionary
+
