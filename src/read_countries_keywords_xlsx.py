@@ -1,7 +1,20 @@
 import os
-import csv
 import pandas as pd
+import zipfile
+# the following function unzips the GoogleTrendsKeywords.zip file in the datasets directory into a folder of a same name
+def unzip_google_trends_keywords_compressed():
+    # define the directory path containing dataset
+    dataset_directory = "datasets/"
 
+    # define the directory path containing csv files of google trends by country
+    googleTrends_directory = dataset_directory
+
+    # define the zip file path
+    zip_file_path = os.path.join(dataset_directory, "GoogleTrendsKeywords.zip")
+
+    # unzip the zip file
+    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+        zip_ref.extractall(googleTrends_directory)
 def read_google_trends_xlsx_files():
     # define the directory path containing datasets subfolders
     dataset_directory = "datasets/"

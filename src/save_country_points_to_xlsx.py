@@ -36,8 +36,3 @@ def save_country_points_to_xlsx():
             worksheet.write(i + 1, j + 1, country_to_points_dict[country_names[i]][j])
     # close the workbook
     workbook.close()
-
-# save_country_points_to_xlsx()
-
-
-

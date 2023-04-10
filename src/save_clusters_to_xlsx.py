@@ -36,5 +36,3 @@ def compute_k_means_clustering_and_save_in_excel_file(num_of_clusters):
 
     # the following line calls the function to save the results in an excel file
     save_clusters_in_excel_file(cluster_to_countries_dict, num_of_clusters)
-
-# compute_k_means_clustering_and_save_in_excel_file(num_of_clusters = 8)
