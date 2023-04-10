@@ -17,10 +17,8 @@ def save_country_points_to_xlsx():
     country_to_genre_dict, country_to_num_of_keywords_dict = compute_each_country_genre_count(country_trends_dict,
                                                                                               country_names,
                                                                                               keyword_to_genre_dictionary)
-    print(country_to_genre_dict["Afghanistan"])
     # the following code is used to save the country points to xlsx file
     country_to_points_dict = assign_countries_points_in_space(country_to_genre_dict, country_to_num_of_keywords_dict)
-    print(country_to_points_dict["Afghanistan"])
     # create a workbook
     workbook = xlsxwriter.Workbook('keyword_percentage_per_country.xlsx')
     # create a worksheet
