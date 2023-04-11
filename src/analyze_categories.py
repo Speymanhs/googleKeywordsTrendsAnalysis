@@ -171,7 +171,6 @@ def show_most_popular_genres_in_each_country_excluding_none():
     country_to_genre_dict, country_to_num_of_keywords_dict = compute_each_country_genre_count(country_trends_dict,
                                                                                               country_names,
                                                                                               keyword_to_genre_dictionary)
-    show_most_popular_genres_in_each_country_excluding_none(country_to_genre_dict, country_to_num_of_keywords_dict)
     genre_pecentage_list_all_countries = {}
     # loop through all the countries
     for country_name in country_to_genre_dict:
@@ -195,6 +194,16 @@ def show_most_popular_genres_in_each_country_excluding_none():
         genre_pecentage_list_all_countries[country_name] = genre_percentage_list
         # category_dict = {"Action/Fighting/Horror": 1, "Adventure": 2, "RPG": 3, "Simulation": 4, "Strategy": 5, "Sports": 6,
         #             "Puzzle": 7, "Platformer": 8, "Casual": 9, "Family": 10}
+
+    return genre_pecentage_list_all_countries
+
+def save_most_popular_genres_in_each_country_excluding_none_in_xlsx():
+    country_trends_dict, country_names = read_google_trends_xlsx_files()
+    country_to_genre_dict, country_to_num_of_keywords_dict = compute_each_country_genre_count(country_trends_dict,
+                                                                                              country_names,
+                                                                                              keyword_to_genre_dictionary)
+
+    genre_pecentage_list_all_countries = show_most_popular_genres_in_each_country_excluding_none()
 
     # the following code saves the results in an xlsx file
     # # initialize the workbook

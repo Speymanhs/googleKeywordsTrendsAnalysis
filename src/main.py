@@ -3,8 +3,7 @@ from src.analyze_clusters import compute_k_means_clustering_with_auxiliary_data,
 from src.save_clusters_to_xlsx import compute_k_means_clustering_and_save_in_excel_file
 from src.save_country_points_to_xlsx import save_country_points_to_xlsx
 from src.analyze_similar_countries import compute_similarity_between_countries_in_each_group
-from src.analyze_clusters import compute_k_means_clustering
-
+from src.analyze_categories import show_most_popular_genres_in_each_country_excluding_none
 
 if __name__ == "__main__":
     # the following line checks if there is already a folder named "GoogleTrendsKeywords" in the datasets directory
@@ -30,3 +29,7 @@ if __name__ == "__main__":
     #the following line computes the similarity between countries in each group (in final_analysis_data.xlsx) based on similarity_criteria
     compute_similarity_between_countries_in_each_group(similarity_criteria=similarity_criteria)
 
+    genre_pecentage_list_all_countries = show_most_popular_genres_in_each_country_excluding_none()
+    print("The following shows the most popular genres in each country excluding the 'None' genre:")
+    for country in genre_pecentage_list_all_countries:
+        print(country, " : ", genre_pecentage_list_all_countries[country][0][0])
