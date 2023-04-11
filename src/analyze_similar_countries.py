@@ -65,4 +65,3 @@ def compute_similarity_between_countries_in_each_group(similarity_criteria):
         print(countries_to_distance_from_mean_dict)
         print("")
 
-

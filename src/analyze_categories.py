@@ -162,3 +162,42 @@ def perform_k_means_clustering(country_to_points_dict, num_of_clusters):
             cluster_to_countries_dict[cluster].append(country_name)
     return cluster_to_countries_dict
 
+
+# the following function shows the most popular genres in each country excluding the "None" genre
+def show_most_popular_genres_in_each_country_excluding_none(country_to_genre_dict, country_to_num_of_keywords_dict):
+    # loop through all the countries
+    for country_name in country_to_genre_dict:
+        # get the number of keywords in the country
+        num_of_keywords = country_to_num_of_keywords_dict[country_name]
+        # initialize a list to store the percentage of keywords belonging to each genre
+        genre_percentage_list = []
+        # loop through all the genres
+        for genre in country_to_genre_dict[country_name]:
+            # check if the genre is not "None"
+            if genre != "None":
+                # get the number of keywords belonging to the genre
+                genre_count = country_to_genre_dict[country_name][genre]
+                # compute the percentage of keywords belonging to the genre
+                percentage = genre_count / num_of_keywords * 100
+                # add the percentage to the list
+                genre_percentage_list.append([genre, percentage])
+        # sort the list based on the percentage
+        genre_percentage_list.sort(key=lambda x: x[1], reverse=True)
+        # print the country name
+        # print(country_name)
+        # print the list
+        # cat_dict = {"Action/Fighting/Horror": 1, "Adventure": 2, "RPG": 3, "Simulation": 4, "Strategy": 5, "Sports": 6,
+        #             "Puzzle": 7, "Platformer": 8, "Casual": 9, "Family": 10}
+        print(genre_percentage_list[0][0])
+        # print()
+
+# cat_dict = {"Action/Fighting/Horror": 1, "Adventure": 2, "RPG": 3, "Simulation": 4, "Strategy": 5, "Sports": 6, "Puzzle": 7, "Platformer": 8, "Casual": 9, "Family":10}
+
+# from src.read_countries_keywords_xlsx import read_google_trends_xlsx_files
+# from src.category_dictionaries import keyword_to_genre_dictionary
+#
+# country_trends_dict, country_names = read_google_trends_xlsx_files()
+# country_to_genre_dict, country_to_num_of_keywords_dict = compute_each_country_genre_count(country_trends_dict,
+#                                                                                               country_names,
+#                                                                                               keyword_to_genre_dictionary)
+# show_most_popular_genres_in_each_country_excluding_none(country_to_genre_dict, country_to_num_of_keywords_dict)
