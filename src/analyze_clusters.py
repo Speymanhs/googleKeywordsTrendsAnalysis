@@ -89,3 +89,31 @@ def compute_k_means_clustering_with_auxiliary_data(num_of_clusters, similarity_c
 
     # the following line calls the function to compute the similarity between countries in each cluster
     compute_similarity_between_countries_in_each_cluster(cluster_to_countries_dict, num_of_clusters, similarity_criteria, country_to_criteria_ranking_dict)
+
+# the following function performs compute_k_means_clustering with 3 to 8 clusters and checks which countries are always in the same cluster
+def find_countries_ending_up_in_same_clusters():
+    # the following line defines an empty dictionary to store the country as key and the cluster number as value
+    country_to_cluster_dict = {}
+
+    # the following loop performs k-means clustering with 3 to 8 clusters and appends the number of cluster each country belongs to in the country_to_cluster_dict
+    for num_of_clusters in range(3, 9):
+        cluster_to_countries_dict = compute_k_means_clustering(num_of_clusters)
+        for cluster_num in range(num_of_clusters):
+            # the following line gets the list of countries in the cluster
+            countries_in_cluster = cluster_to_countries_dict[cluster_num]
+            for country in countries_in_cluster:
+                if country not in country_to_cluster_dict:
+                    country_to_cluster_dict[country] = [cluster_num]
+                else:
+                    country_to_cluster_dict[country].append(cluster_num)
+
+    # the following line defines an empty dictionary to store the tuple of cluster numbers as key and the list of countries as value
+    results_dict = {}
+    for key, value_list in country_to_cluster_dict.items():
+        value_tuple = tuple(value_list)
+
+        if value_tuple in results_dict:
+            results_dict[value_tuple].append(key)
+        else:
+            results_dict[value_tuple] = [key]
+    return results_dict
