@@ -2,6 +2,7 @@ from src.read_countries_keywords_xlsx import unzip_google_trends_keywords_compre
 from src.analyze_clusters import compute_k_means_clustering_with_auxiliary_data, find_countries_ending_up_in_same_clusters
 from src.save_clusters_to_xlsx import compute_k_means_clustering_and_save_in_excel_file
 from src.save_country_points_to_xlsx import save_country_points_to_xlsx
+from src.analyze_similar_countries import compute_similarity_between_countries_in_each_group
 from src.analyze_clusters import compute_k_means_clustering
 
 
@@ -25,3 +26,6 @@ if __name__ == "__main__":
     #the following line compute the clusters and measure the similarity between members of each cluster based on similarity_criteria
     #the possible values to choose for similarity_criteria are: "democracy", "unemployment", "income_inequality", "conflicts_and_war", "mandatory_service"
     compute_k_means_clustering_with_auxiliary_data(num_of_clusters=number_of_clusters, similarity_criteria=similarity_criteria)
+
+    #the following line computes the similarity between countries in each group (in final_analysis_data.xlsx) based on similarity_criteria
+    compute_similarity_between_countries_in_each_group(similarity_criteria=similarity_criteria)
