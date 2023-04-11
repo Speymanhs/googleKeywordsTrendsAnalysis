@@ -122,3 +122,25 @@ def read_mandatory_service_data_xlsx_file():
 
     return country_to_mandatory_service_dictionary
 
+# the following function is used to read final_analysis_data.xlsx file and return a dictionary containing the data
+# the return dictionary of this function is of the format: "Country": group_number
+def read_final_analysis_data_xlsx_file():
+    # define the directory path containing dataset
+    dataset_directory = "datasets/"
+
+    #define a dictionar named country_to_group_dictionary
+    country_to_group_dictionary = {}
+
+    # read the xlsx file
+    final_analysis_df = pd.read_excel(os.path.join(dataset_directory, "final_analysis_data.xlsx"), header=None)
+
+    # assign the first row as column labels
+    final_analysis_df.columns = final_analysis_df.iloc[0]
+
+    # remove the first row from the dataframe because it is the column labels
+    final_analysis_df = final_analysis_df[1:]
+
+    # create a dictionary with the first column as keys and the other columns as values
+    country_to_group_dictionary = {row[0]: row[1] for row in final_analysis_df.itertuples(index=False)}
+
+    return country_to_group_dictionary
