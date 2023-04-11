@@ -1,5 +1,7 @@
 from sklearn.cluster import KMeans
 import xlsxwriter
+from src.read_countries_keywords_xlsx import read_google_trends_xlsx_files
+from src.category_dictionaries import keyword_to_genre_dictionary
 def compute_each_country_genre_count(country_trends_dict, country_names, keyword_to_genre_dictionary):
     country_to_genre_dict = {}
     country_to_num_of_keywords_dict = {}
@@ -164,7 +166,12 @@ def perform_k_means_clustering(country_to_points_dict, num_of_clusters):
 
 
 # the following function shows the most popular genres in each country excluding the "None" genre
-def show_most_popular_genres_in_each_country_excluding_none(country_to_genre_dict, country_to_num_of_keywords_dict):
+def show_most_popular_genres_in_each_country_excluding_none():
+    country_trends_dict, country_names = read_google_trends_xlsx_files()
+    country_to_genre_dict, country_to_num_of_keywords_dict = compute_each_country_genre_count(country_trends_dict,
+                                                                                              country_names,
+                                                                                              keyword_to_genre_dictionary)
+    show_most_popular_genres_in_each_country_excluding_none(country_to_genre_dict, country_to_num_of_keywords_dict)
     genre_pecentage_list_all_countries = {}
     # loop through all the countries
     for country_name in country_to_genre_dict:

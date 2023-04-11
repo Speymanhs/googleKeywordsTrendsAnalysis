@@ -29,3 +29,4 @@ if __name__ == "__main__":
 
     #the following line computes the similarity between countries in each group (in final_analysis_data.xlsx) based on similarity_criteria
     compute_similarity_between_countries_in_each_group(similarity_criteria=similarity_criteria)
+
