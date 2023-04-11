@@ -1,5 +1,5 @@
 from sklearn.cluster import KMeans
-
+import xlsxwriter
 def compute_each_country_genre_count(country_trends_dict, country_names, keyword_to_genre_dictionary):
     country_to_genre_dict = {}
     country_to_num_of_keywords_dict = {}
@@ -165,6 +165,7 @@ def perform_k_means_clustering(country_to_points_dict, num_of_clusters):
 
 # the following function shows the most popular genres in each country excluding the "None" genre
 def show_most_popular_genres_in_each_country_excluding_none(country_to_genre_dict, country_to_num_of_keywords_dict):
+    genre_pecentage_list_all_countries = {}
     # loop through all the countries
     for country_name in country_to_genre_dict:
         # get the number of keywords in the country
@@ -183,21 +184,29 @@ def show_most_popular_genres_in_each_country_excluding_none(country_to_genre_dic
                 genre_percentage_list.append([genre, percentage])
         # sort the list based on the percentage
         genre_percentage_list.sort(key=lambda x: x[1], reverse=True)
-        # print the country name
-        # print(country_name)
-        # print the list
-        # cat_dict = {"Action/Fighting/Horror": 1, "Adventure": 2, "RPG": 3, "Simulation": 4, "Strategy": 5, "Sports": 6,
+
+        genre_pecentage_list_all_countries[country_name] = genre_percentage_list
+        # category_dict = {"Action/Fighting/Horror": 1, "Adventure": 2, "RPG": 3, "Simulation": 4, "Strategy": 5, "Sports": 6,
         #             "Puzzle": 7, "Platformer": 8, "Casual": 9, "Family": 10}
-        print(genre_percentage_list[0][0])
-        # print()
 
-# cat_dict = {"Action/Fighting/Horror": 1, "Adventure": 2, "RPG": 3, "Simulation": 4, "Strategy": 5, "Sports": 6, "Puzzle": 7, "Platformer": 8, "Casual": 9, "Family":10}
+    # the following code saves the results in an xlsx file
+    # # initialize the workbook
+    workbook = xlsxwriter.Workbook('favourite_categories_per_country.xlsx')
+    # # initialize the worksheet
+    worksheet = workbook.add_worksheet()
+    # Write the header to xlsx file
+    worksheet.write(0, 0, "Country")
+    worksheet.write(0, 1, "Category")
+    # # initialize the row counter
+    row = 1
+    # # loop through all the countries
+    for country_name in country_to_genre_dict:
+        # write the country name in the worksheet
+        worksheet.write(row, 0, country_name)
+        # write the list in the worksheet
+        worksheet.write(row, 1, genre_pecentage_list_all_countries[country_name][0][0])
+        # increment the row counter
+        row += 1
+    # close the workbook
+    workbook.close()
 
-# from src.read_countries_keywords_xlsx import read_google_trends_xlsx_files
-# from src.category_dictionaries import keyword_to_genre_dictionary
-#
-# country_trends_dict, country_names = read_google_trends_xlsx_files()
-# country_to_genre_dict, country_to_num_of_keywords_dict = compute_each_country_genre_count(country_trends_dict,
-#                                                                                               country_names,
-#                                                                                               keyword_to_genre_dictionary)
-# show_most_popular_genres_in_each_country_excluding_none(country_to_genre_dict, country_to_num_of_keywords_dict)
