@@ -13,7 +13,7 @@ out of the 6 clusters were studied.
 
 The results showed that these countries formed 4 big groups of countries. These groups show 
 a similarity of interest that has correlation with similarity of culture in these countries 
-as well as linguitstic similarity and how these countries rank in terms of democracy.
+as well as linguitstic similarity and how these countries rank in terms of democracy (the data for this was gathered from World Population Review).
 The written result of this study is being writing and will be added to this repository in the future. 
 
 In order to run the code, and interact with our code, you could use the following steps after
